@@ -59,7 +59,7 @@ use for testing.
 
  * [`IGrid<T>`][IGrid] is a [generic interface](https://docs.oracle.com/javase/tutorial/extra/generics/simple.html), and your grid implementations should be generic as well.       
    For example, your rectangular grid class should have the following signature:
-   ```
+   ```java
    public class RectangularGrid<T> implements IGrid<T>
    ```
 
@@ -68,14 +68,14 @@ use for testing.
  * When you implement the serialization methods, you will need to write
    to an `OutputStream`. One simple way to write strings to an output stream
    is by creating an output stream writer:
-   ```
+   ```java
    // output is an OutputStream
    OutputStreamWriter writer = new OutputStreamWriter(output);
    ```
 
  * Another note about serialization. You are given a function that converts
    `Rack` objects to `byte[]`. You can convert `byte[]` to `String` as follows:
-   ```
+   ```java
    // byteArray is a byte[]
    String s = new String(byteArray);
    ```
