@@ -23,15 +23,19 @@ See the marking scheme below for more details.
 
 ### Guidance
 
-In your last assignments, you implemented robots that moves in a grid.
-In this assignment, you will implement the grid, as well as a way to serialize/deserialize it.
+In your last assignment, you implemented robots that move in a grid.
+In this assignment, you will implement the grid itself, as well as a way to
+serialize/deserialize it.
 
-The idea is that a grid represents the floor plan of a warehouse, and
-serialization allows us to save/load floor plan to/from files.
+A grid can be used to represent the floor plan of a warehouse, and
+serialization allows us to save/load floor plans to/from files.
 
-For the purpose of your assignments, floor plans will be very simple.
-For example, below is a floor plan of a small warehouse containing a few
-[racks](https://www.bing.com/images/search?q=warehouse+racks&go=Search&qs=n&form=QBILPG&pq=warehouse+racks&sc=8-15&sp=-1&sk=).
+For the purpose of your assignments, floor plans will be very simple:
+  * The warehouse floor is a grid
+  * Grid cells can contains [racks](https://www.bing.com/images/search?q=warehouse+racks&go=Search&qs=n&form=QBILPG&pq=warehouse+racks&sc=8-15&sp=-1&sk=)
+  * A [`Rack`](/src/main/java/edu/toronto/csc301/warehouse/Rack.java) is a simple object with a single field, `capacity`.
+
+For example, below is a floor plan of a small, rectangular warehouse containing a few racks.
 
 ![Simple floor plan](https://csc301-fall-2016.github.io/resources/warehouse-floor-plan.png)
 
@@ -47,7 +51,8 @@ For each grid, you will implement the corresponding [`IGridSerializerDeserialize
 
  * As with the previous assignments, you should start by passing all test methods in
  [`SetupTest`](src/test/java/edu/toronto/csc301/SetupTest.java).
-   > *Note:* You will need to create the `impl` (stands for implementation) package, as directed by the tests.
+   > *Note:* You will need to create the `impl` package, as directed by the tests.      
+   > (`impl` stands for implementation)
 
  * The [`src/test/resources`](/src/test/resources) contains all the data files we
 use for testing.
@@ -73,11 +78,12 @@ use for testing.
    OutputStreamWriter writer = new OutputStreamWriter(output);
    ```
 
- * Another note about serialization. You are given a function that converts
-   `Rack` objects to `byte[]`. You can convert `byte[]` to `String` as follows:
+ * Another note about serialization. [`RackUtil`](/src/main/java/edu/toronto/csc301/warehouse/RackUtil.java) contains helper functions that convert between `Rack` objects and `byte[]`. If you need to convert between `byte[]` and `String`, you can use:
    ```java
-   // byteArray is a byte[]
-   String s = new String(byteArray);
+   // byte[] to String
+   String str = new String(byteArray);
+   // String to byte[]
+   byte[] byteArray = str.getBytes();
    ```
 
 ## Deliverables
