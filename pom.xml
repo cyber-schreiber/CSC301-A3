@@ -57,6 +57,7 @@
 			<groupId>com.github.csc301-fall-2016</groupId>
 			<artifactId>csc301-java-utils</artifactId>
 			<version>master-SNAPSHOT</version>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
