@@ -10,6 +10,7 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
+import java.util.regex.Pattern;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,6 +26,26 @@ import edu.toronto.csc301.warehouse.RackUtil;
 
 public class SerializeDeserializeTest {
 
+	
+	// ------------------------------------------------------------------------
+	/*
+	 * Unix and Windows use different newline characters (Unix uses '\n', while
+	 * Windows uses '\r\n').
+	 * Since you might develop your code on either Windows or Unix machines,
+	 * we need to be a bit careful when comparing strings. 
+	 */
+	
+	private static Pattern NEW_LINE = Pattern.compile("\r?\n");  // Match either Windows or Unix style newline
+	
+	/**
+	 * Convenience helper.
+	 * Returns a copy of s with any Windows-style newline character, '\r\n',
+	 * replaced by a Unix style newline character, '\n'. 
+	 */
+	public static String withUnixStyleNewLine(String s){
+		return NEW_LINE.matcher(s).replaceAll("\n");
+	}
+	
 	
 	// ------------------------------------------------------------------------
 
@@ -58,6 +79,7 @@ public class SerializeDeserializeTest {
 			.toString();
 		
 		String actual = TestUtil.serialize2String(grid, rectSD, RackUtil::rack2bytes);
+		actual = withUnixStyleNewLine(actual);
 		
 		assertEquals(expected.trim(), actual.trim());
 	}
@@ -117,11 +139,12 @@ public class SerializeDeserializeTest {
 		String s = serialize2String(grid, flexSD, RackUtil::rack2bytes);
 		
 		// Let's make sure that the grid was serialized properly to .flex.txt format ...
- 
+		
+		s = withUnixStyleNewLine(s);
 		String[] lines = s.split("\n");
 		Arrays.sort(lines);
 		
-		String[] expectedLines = resourceAsString(pathFlex).split("\n");
+		String[] expectedLines = withUnixStyleNewLine(resourceAsString(pathFlex)).split("\n");
 		Arrays.sort(expectedLines);
 		
 		assertArrayEquals(expectedLines, lines);
@@ -181,8 +204,10 @@ public class SerializeDeserializeTest {
 		
 		// Let's make sure that the grid was serialized properly to .rect.txt format ...
  
+		s = withUnixStyleNewLine(s);
 		String[] lines = s.split("\n");
-		String[] expectedLines = resourceAsString(pathRect).split("\n");
+		
+		String[] expectedLines = withUnixStyleNewLine(resourceAsString(pathRect)).split("\n");
 		
 		// The first three lines should be the same
 		assertEquals(expectedLines[0], lines[0]); // width
