@@ -35,9 +35,13 @@ For the purpose of your assignments, floor plans will be very simple:
   * Grid cells can contains [racks](https://www.bing.com/images/search?q=warehouse+racks&go=Search&qs=n&form=QBILPG&pq=warehouse+racks&sc=8-15&sp=-1&sk=)
   * A [`Rack`](/src/main/java/edu/toronto/csc301/warehouse/Rack.java) is a simple object with a single field, `capacity`.
 
-For example, below is a floor plan of a small, rectangular warehouse containing a few racks.
+For example, below is a floor plan of a small, rectangular warehouse containing a few racks:
 
 ![Simple floor plan](https://csc301-fall-2016.github.io/resources/warehouse-floor-plan.png)
+
+And, here is a floor plan of a warehouses that is not rectangular:
+
+![Flex floor plan](https://csc301-winter-2017.github.io/resources/warehouse-floor-plan-flex.png)
 
 You will need to create two implementations of the [`IGrid<T>`][IGrid] interface:
 
