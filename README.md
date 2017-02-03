@@ -41,7 +41,7 @@ For example, below is a floor plan of a small, rectangular warehouse containing 
 
 And, here is a floor plan of a warehouses that is not rectangular:
 
-![Flex floor plan](https://csc301-winter-2017.github.io/resources/warehouse-floor-plan-flex.png)
+![Flex floor plan](https://csc301-winter-2017.github.io/resources/warehouse-floor-plan-flex.png?refresh=1)
 
 You will need to create two implementations of the [`IGrid<T>`][IGrid] interface:
 
