@@ -22,6 +22,9 @@ public class FlexGrid<T> implements IGrid<T> {
 	
 	@Override
 	public T getItem(GridCell cell) {
+		if (!cells.contains(cell)){
+			throw new IllegalArgumentException();
+		}
 		return this.items.get(cell.toString());
 	}
 	
