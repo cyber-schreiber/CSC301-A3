@@ -15,7 +15,6 @@ import java.util.function.Function;
 import edu.toronto.csc301.grid.GridCell;
 import edu.toronto.csc301.grid.IGrid;
 import edu.toronto.csc301.grid.IGridSerializerDeserializer;
-import edu.toronto.csc301.warehouse.Rack;
 
 public class FlexGridSerializerDeserializer implements IGridSerializerDeserializer {
 
@@ -24,7 +23,7 @@ public class FlexGridSerializerDeserializer implements IGridSerializerDeserializ
 			Function<byte[], T> byteArray2item) throws IOException {
 		
 		List<GridCell> gridCells = new ArrayList<GridCell>();
-		Map<GridCell, Rack> items = new HashMap<GridCell, Rack>();
+		Map<GridCell, T> items = new HashMap<GridCell, T>();
 		
 		BufferedReader reader =  new BufferedReader(new InputStreamReader(input));
 		String line;
@@ -36,17 +35,16 @@ public class FlexGridSerializerDeserializer implements IGridSerializerDeserializ
 			gridCells.add(cell);
 			
 			if (line.split(" ").length > 1){
-				int rack_cap = Integer.parseInt(line.split(" ")[1].split(":")[1]);
-				items.put(cell, new Rack(rack_cap));
+				items.put(cell, byteArray2item.apply(line.split(" ")[1].getBytes()));
 			}
 		}
 		
-		FlexGrid<Rack> fg =  new FlexGrid<Rack>(gridCells);
+		FlexGrid<T> fg =  new FlexGrid<T>(gridCells);
 		for (GridCell cell: items.keySet()){
 			fg.addItem(cell, items.get(cell));
 		}
 		
-		return (IGrid<T>) fg;
+		return fg;
 		
 	}
 

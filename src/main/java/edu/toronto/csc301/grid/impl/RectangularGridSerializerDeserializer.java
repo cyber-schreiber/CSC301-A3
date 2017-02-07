@@ -99,15 +99,15 @@ public class RectangularGridSerializerDeserializer implements IGridSerializerDes
 		String[] sw_coords = reader.readLine().split(" ")[1].split(":");
 		GridCell sw = GridCell.at(Integer.parseInt(sw_coords[0]), 
 				Integer.parseInt(sw_coords[1]));
-		RectangularGrid<Rack> rg = new RectangularGrid<Rack>(width, height, sw);
+		RectangularGrid<T> rg = new RectangularGrid<T>(width, height, sw);
 		String line;
 		while ((line = reader.readLine()) != null){
 			String[] grid_coords = line.split(" ")[0].split(":");
-			int rack_cap = Integer.parseInt(line.split(" ")[1].split(":")[1]);
 			rg.addItem(GridCell.at(Integer.parseInt(grid_coords[0])
-					, Integer.parseInt(grid_coords[1])), new Rack(rack_cap));
+					, Integer.parseInt(grid_coords[1])),
+					byteArray2item.apply(line.split(" ")[1].getBytes()));
 		}
-		return (IGrid<T>) rg;
+		return rg;
 	}
 
 }

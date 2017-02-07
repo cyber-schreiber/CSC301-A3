@@ -45,8 +45,8 @@ public class RectangularGrid<T> implements IGrid<T> {
 		return this.items.get(cell.toString());
 	}
 	
-	public void addItem(GridCell cell, T rack){
-		this.items.put(cell.toString(), rack);
+	public void addItem(GridCell cell, T t){
+		this.items.put(cell.toString(), t);
 	}
 
 	@Override
